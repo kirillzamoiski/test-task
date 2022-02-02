@@ -1,0 +1,46 @@
+<h3> Please enter your name and pick the Sectors you are currently involved in.</h3>
+<br>
+<div>
+  <div class="form-group">
+    <label>Name</label>
+    <input class="form-control" name="name" [(ngModel)]="userInfo.name" #name="ngModel" required>
+    <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+      Name can't be empty
+    </div>
+  </div>
+  <br>
+  <div class="form-group">
+    <label>Sectors</label>
+    <input class="form-control" type="text" disabled value="{{userInfo.sector}}">
+    <select class="form-select" name="sectorName" multiple size="20" [(ngModel)]="userInfo.sector"
+            #sectorName="ngModel" (change)="getChildList()" required>
+      <optgroup *ngFor="let element of viewParentList" label="{{element.name}}">
+        <option *ngFor="let value of element.sectors" value="{{value.name}}">
+          {{value.name}}
+        </option>
+      </optgroup>
+    </select>
+    <select *ngIf="editable" class="form-select" name="sectorName" multiple size="20" [(ngModel)]="userInfo.sector"
+              (change)="getChildList()">
+      <option *ngFor="let element of viewChildList">{{element.name}}</option>
+    </select>
+    <div [hidden]="sectorName.valid || sectorName.untouched" class="alert alert-danger">
+      You should pick the Sectors you are involved in
+    </div>
+  </div>
+  <br>
+  <div class="form-group">
+    <input class="form-check-input" name="checkAgree" type="checkbox" [(ngModel)]="userInfo.agreeToTerms"
+           #checkAgree="ngModel" required>
+    <label>
+      Agree to terms
+    </label>
+    <div [hidden]="checkAgree.valid || checkAgree.untouched" class="alert alert-danger">
+      You should agree to terms
+    </div>
+  </div>
+  <br>
+  <div class="form-group">
+    <button [disabled]="name.invalid || checkAgree.invalid || sectorName.invalid" class="btn btn-primary" (click)="saveProfile()">Save</button>
+  </div>
+</div>

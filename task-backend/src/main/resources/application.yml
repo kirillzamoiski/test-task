@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://sector-db:5432/sector
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: db/changelog/db.changelog-master.xml
