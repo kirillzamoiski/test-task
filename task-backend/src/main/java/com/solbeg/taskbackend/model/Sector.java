@@ -24,11 +24,10 @@ public class Sector {
     @Column(name = "name")
     private String name;
 
-    @JoinColumn(name = "parent_id")
     @Column(name = "parent_id")
     private Long parentId;
 
-    @OneToMany()
+    @OneToMany
     @JoinColumn(name = "parent_id")
     private List<Sector> sectors;
 }
